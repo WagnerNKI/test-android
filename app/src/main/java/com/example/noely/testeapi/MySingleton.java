@@ -1,12 +1,10 @@
 package com.example.noely.testeapi;
 
 import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import java.lang.ref.ReferenceQueue;
 
 public class MySingleton {
     private static MySingleton mInstance;
@@ -20,6 +18,7 @@ public class MySingleton {
 
     public RequestQueue getRequestQueue(){
 
+        //if no request queue is initialized, it is initialized
         if (requestQueue == null){
             requestQueue = Volley.newRequestQueue(mCtx.getApplicationContext());
 

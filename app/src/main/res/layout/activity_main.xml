@@ -5,21 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
+    <view class="android.support.v7.app.AlertController$RecycleListView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
-        android:text="Name appear here"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="190dp" />
+        android:id="@+id/recyclerView">
 
+
+    </view>
     <Button
         android:id="@+id/bn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get information"
+        android:text="Display list"
         tools:layout_editor_absoluteX="35dp"
         tools:layout_editor_absoluteY="128dp" />
 </android.support.constraint.ConstraintLayout>
