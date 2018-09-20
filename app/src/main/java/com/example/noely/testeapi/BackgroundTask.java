@@ -33,7 +33,7 @@ public class BackgroundTask {
                 while (count < response.length()){
                     try {
                         JSONObject jsonObject = response.getJSONObject(count);
-                        Pokemon pokemon = new Pokemon(jsonObject.getString("Name"));
+                        Pokemon pokemon = new Pokemon(jsonObject.getString("name"));
                         arrayList.add(pokemon);
                         count++;
 
