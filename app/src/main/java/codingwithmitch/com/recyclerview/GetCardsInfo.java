@@ -1,4 +1,4 @@
-package com.example.noely.testeapi;
+package codingwithmitch.com.recyclerview;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -14,16 +14,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class BackgroundTask {
+public class GetCardsInfo {
 
     Context context;
     ArrayList<Pokemon> arrayList = new ArrayList<>();
     String json_url = "https://api.pokemontcg.io/v1/cards?count=20";
-    public BackgroundTask (Context context){
+
+
+    public GetCardsInfo (Context context){
         this.context = context;
     }
 
-    public ArrayList<Pokemon> getArrayList() {
+    public ArrayList<Pokemon> getList() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, json_url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -33,7 +35,7 @@ public class BackgroundTask {
                 while (count < response.length()){
                     try {
                         JSONObject jsonObject = response.getJSONObject(count);
-                        Pokemon pokemon = new Pokemon(jsonObject.getString("name"));
+                        Pokemon pokemon = new Pokemon(jsonObject.getString("name"),jsonObject.getString("imageUrl"),jsonObject.getString("nationalPokedexNumber"),jsonObject.getString("hp"));
                         arrayList.add(pokemon);
                         count++;
 
