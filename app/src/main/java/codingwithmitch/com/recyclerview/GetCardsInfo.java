@@ -1,6 +1,7 @@
 package codingwithmitch.com.recyclerview;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.android.volley.VolleyLog.TAG;
 
 public class GetCardsInfo {
 
@@ -38,7 +41,7 @@ public class GetCardsInfo {
                         Pokemon pokemon = new Pokemon(jsonObject.getString("name"),jsonObject.getString("imageUrl"),jsonObject.getString("nationalPokedexNumber"),jsonObject.getString("hp"));
                         arrayList.add(pokemon);
                         count++;
-
+                        Log.d(TAG, "onResponse: Caught"+arrayList.size());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

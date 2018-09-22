@@ -7,10 +7,10 @@ public class Pokemon {
     private String Hp;
 
     public Pokemon(String name, String imageUrl, String nationalPokedexNumber, String hp) {
-        this.Name = name;
-        this.ImageUrl = imageUrl;
-        this.nationalPokedexNumber = nationalPokedexNumber;
-        this.Hp = hp;
+        this.setName(name);
+        this.setImageUrl(imageUrl) ;
+        this.setNationalPokedexNumber(nationalPokedexNumber);
+        this.setHp(hp);
     }
 
     public String getName() {

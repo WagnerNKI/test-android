@@ -12,9 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
+    //Array declaration
     ArrayList<Pokemon> arrayList = new ArrayList<>();
 
     @Override
@@ -24,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         GetCardsInfo getCardsInfo = new GetCardsInfo(MainActivity.this);
         arrayList = getCardsInfo.getList();
         Log.d(TAG, "onCreate: started.");
-
         initRecyclerView();
     }
 

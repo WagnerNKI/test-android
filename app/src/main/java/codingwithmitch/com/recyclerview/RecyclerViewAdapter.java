@@ -10,15 +10,8 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by User on 1/1/2018.
@@ -28,13 +21,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<Pokemon> Names = new ArrayList<>();
+    private ArrayList<Pokemon> arrayList = new ArrayList<>();
     private Context mContext;
 
 
-    public RecyclerViewAdapter(Context context, ArrayList<Pokemon> name ) {
-        Names = name;
-
+    public RecyclerViewAdapter(Context context, ArrayList<Pokemon> arrayList ) {
+        this.arrayList = arrayList;
         mContext = context;
     }
 
@@ -49,23 +41,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        Glide.with(mContext)
-                .asBitmap()
-                .load(mImages.get(position))
-                .into(holder.image);
 
-        holder.imageName.setText(mImageNames.get(position));
+        holder.Name.setText(arrayList.get(position).getName());
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mImageNames.get(position));
+                Log.d(TAG, "onClick: clicked on: " + arrayList.get(position).getName());
 
-                Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, arrayList.get(position).getName(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, GalleryActivity.class);
-                intent.putExtra("image_url", mImages.get(position));
-                intent.putExtra("image_name", mImageNames.get(position));
+                intent.putExtra("image_url", arrayList.get(position).getImageUrl());
+                intent.putExtra("image_name", arrayList.get(position).getName());
                 mContext.startActivity(intent);
             }
         });
@@ -73,19 +61,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return mImageNames.size();
+        return arrayList.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView imageName;
+        TextView Name;
         RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.image);
-            imageName = itemView.findViewById(R.id.image_name);
+
+            Name = itemView.findViewById(R.id.image_name);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
