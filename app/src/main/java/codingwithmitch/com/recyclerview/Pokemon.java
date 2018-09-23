@@ -3,10 +3,10 @@ package codingwithmitch.com.recyclerview;
 public class Pokemon {
     private String Name;
     private String ImageUrl;
-    private String nationalPokedexNumber;
+    private int nationalPokedexNumber;
     private String Hp;
 
-    public Pokemon(String name, String imageUrl, String nationalPokedexNumber, String hp) {
+    public Pokemon(String name, String imageUrl, int nationalPokedexNumber, String hp) {
         this.setName(name);
         this.setImageUrl(imageUrl) ;
         this.setNationalPokedexNumber(nationalPokedexNumber);
@@ -29,11 +29,11 @@ public class Pokemon {
         ImageUrl = imageUrl;
     }
 
-    public String getNationalPokedexNumber() {
+    public int getNationalPokedexNumber() {
         return nationalPokedexNumber;
     }
 
-    public void setNationalPokedexNumber(String nationalPokedexNumber) {
+    public void setNationalPokedexNumber(int nationalPokedexNumber) {
         this.nationalPokedexNumber = nationalPokedexNumber;
     }
 

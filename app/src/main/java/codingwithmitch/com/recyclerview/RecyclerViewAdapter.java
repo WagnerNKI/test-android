@@ -21,14 +21,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private static final String TAG = "RecyclerViewAdapter";
 
-    private ArrayList<Pokemon> arrayList = new ArrayList<>();
+    private ArrayList<String> rName = new ArrayList<>();
+    private ArrayList<String> rImageUrl = new ArrayList<>();
+    private ArrayList<Integer> rNationalPokedexNumber = new ArrayList<>();
+    private ArrayList<String> rHp = new ArrayList<>();
     private Context mContext;
 
 
-    public RecyclerViewAdapter(Context context, ArrayList<Pokemon> arrayList ) {
-        this.arrayList = arrayList;
-        mContext = context;
+    public RecyclerViewAdapter(Context context, ArrayList<String> name, ArrayList<String> imageUrl, ArrayList<Integer> nationalPokedexNumber, ArrayList<String> hp) {
+    rName = name;
+    rImageUrl = imageUrl;
+    rNationalPokedexNumber = nationalPokedexNumber;
+    rHp = hp;
+    mContext = context;
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,18 +49,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG, "onBindViewHolder: called.");
 
 
-        holder.Name.setText(arrayList.get(position).getName());
+        holder.Name.setText(rName.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + arrayList.get(position).getName());
+                Log.d(TAG, "onClick: clicked on: " + rName.get(position));
 
-                Toast.makeText(mContext, arrayList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, rName.get(position), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, GalleryActivity.class);
-                intent.putExtra("image_url", arrayList.get(position).getImageUrl());
-                intent.putExtra("image_name", arrayList.get(position).getName());
+                intent.putExtra("image_url", rImageUrl.get(position));
+                intent.putExtra("image_name", rName.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -61,7 +68,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return rName.size();
     }
 
 

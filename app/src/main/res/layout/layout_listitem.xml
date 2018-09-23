@@ -11,11 +11,11 @@
         android:layout_height="wrap_content"
         android:text="Canada"
         android:id="@+id/image_name"
-        android:layout_toRightOf="@+id/image_name"
         android:textColor="#000"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:textSize="17sp"
-        tools:ignore="NotSibling,UnknownIdInLayout" />
+        tools:ignore="NotSibling,UnknownIdInLayout"
+        android:layout_marginStart="30dp" />
 
 </RelativeLayout>
