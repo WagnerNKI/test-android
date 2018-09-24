@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     //Array declaration
-    ArrayList<String> name = new ArrayList<String>();
+    ArrayList<String> name = new ArrayList<>();
     ArrayList<String> imageUrl = new ArrayList<>();
     ArrayList<Integer> nationalPokedexNumber = new ArrayList<>();
     ArrayList<String> hp = new ArrayList<>();
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initGetCardsInfo(){
+
+        //getting the Json object form API
         String json_url = "https://api.pokemontcg.io/v1/cards?count=20";
 
 
@@ -45,19 +47,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    //acessing the array cards that contains the json objects with card infos
                     JSONArray cards = response.getJSONArray("cards");
                     for (int i = 0; i < cards.length(); i++){
+                        //acessing each object and assing
                         JSONObject cardsinfo = cards.getJSONObject(i);
                         name.add(cardsinfo.getString("name"));
-                        imageUrl.add(cardsinfo.getString("imageUrl"));
-                        nationalPokedexNumber.add(cardsinfo.getInt("nationalPokedexNumber"));
-                        hp.add(cardsinfo.getString("hp"));
+                        imageUrl.add(cardsinfo.optString("imageUrl"));
+                        nationalPokedexNumber.add(cardsinfo.optInt("nationalPokedexNumber"));
+                        hp.add(cardsinfo.optString("hp"));
+                        Log.d(TAG, "onResponse: caught "+name.size());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+            initRecyclerView();
             }
-        }, new Response.ErrorListener() {
+
+            }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this,"Error",Toast.LENGTH_SHORT).show();
@@ -66,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         });
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(jsonObjectRequest);
 
-        initRecyclerView();
     }
 
 
@@ -78,25 +85,3 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

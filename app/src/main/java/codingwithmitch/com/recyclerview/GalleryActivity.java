@@ -2,18 +2,26 @@ package codingwithmitch.com.recyclerview;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 
 /**
  * Created by User on 1/2/2018.
  */
 
 public class GalleryActivity extends AppCompatActivity {
+
+    String hp = RecyclerViewAdapter.getHp();
+    int nationalPokedexNumber = RecyclerViewAdapter.getNationalPokedexNumber();
 
     private static final String TAG = "GalleryActivity";
 
@@ -22,8 +30,23 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         Log.d(TAG, "onCreate: started.");
+        Button infobn = findViewById(R.id.info_bn);
 
         getIncomingIntent();
+
+        infobn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: More Info");
+                AlertDialog(nationalPokedexNumber, hp);
+            }
+        });
+    }
+
+    public void AlertDialog(int nationalPokedexNumber, String hp){
+                new AlertDialog.Builder(this).setTitle("More info").
+                        setMessage("Esse Pokemon possui " + hp + "HP e seu número da Pokedex é" + nationalPokedexNumber).show();
+
     }
 
     private void getIncomingIntent(){
@@ -39,7 +62,6 @@ public class GalleryActivity extends AppCompatActivity {
         }
     }
 
-
     private void setImage(String imageUrl, String imageName){
         Log.d(TAG, "setImage: setting te image and name to widgets.");
 
@@ -51,6 +73,8 @@ public class GalleryActivity extends AppCompatActivity {
                 .asBitmap()
                 .load(imageUrl)
                 .into(image);
+
+
     }
 
 }

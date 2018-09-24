@@ -23,9 +23,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private ArrayList<String> rName = new ArrayList<>();
     private ArrayList<String> rImageUrl = new ArrayList<>();
-    private ArrayList<Integer> rNationalPokedexNumber = new ArrayList<>();
-    private ArrayList<String> rHp = new ArrayList<>();
+    private static ArrayList<Integer> rNationalPokedexNumber = new ArrayList<>();
+    private static ArrayList<String> rHp = new ArrayList<>();
     private Context mContext;
+    private static int passPosition;
 
 
     public RecyclerViewAdapter(Context context, ArrayList<String> name, ArrayList<String> imageUrl, ArrayList<Integer> nationalPokedexNumber, ArrayList<String> hp) {
@@ -36,9 +37,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     mContext = context;
     }
 
+    public static String getHp() {
+        return rHp.get(passPosition);
+    }
+
+    public static int getNationalPokedexNumber(){
+        return rNationalPokedexNumber.get(passPosition);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d(TAG, "onCreateViewHolder: Created");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -47,9 +56,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
+        passPosition = position;
 
-
-        holder.Name.setText(rName.get(position));
+        holder.pkname.setText(rName.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent = new Intent(mContext, GalleryActivity.class);
                 intent.putExtra("image_url", rImageUrl.get(position));
                 intent.putExtra("image_name", rName.get(position));
+
                 mContext.startActivity(intent);
             }
         });
@@ -74,29 +84,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Name;
+        TextView pkname;
         RelativeLayout parentLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            Name = itemView.findViewById(R.id.image_name);
+            pkname = itemView.findViewById(R.id.pkname);
             parentLayout = itemView.findViewById(R.id.parent_layout);
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
