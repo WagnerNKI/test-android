@@ -47,21 +47,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    //acessing the array cards that contains the json objects with card infos
                     JSONArray cards = response.getJSONArray("cards");
                     for (int i = 0; i < cards.length(); i++){
-                        //acessing each object and assing
+                        //acessing each object inside the Json array and adding the values of each property to its respective array
                         JSONObject cardsinfo = cards.getJSONObject(i);
                         name.add(cardsinfo.getString("name"));
                         imageUrl.add(cardsinfo.optString("imageUrl"));
                         nationalPokedexNumber.add(cardsinfo.optInt("nationalPokedexNumber"));
                         hp.add(cardsinfo.optString("hp"));
-                        Log.d(TAG, "onResponse: caught "+name.size());
+                        Log.d(TAG, "onResponse: caught "+ name.size());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+            // initializing the recyclerViuew after the Json object is fully parsed
             initRecyclerView();
             }
 

@@ -37,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     mContext = context;
     }
 
+    //methods for getting the HP and Pokedex number of clicked Pokemon
     public static String getHp() {
         return rHp.get(passPosition);
     }
@@ -53,13 +54,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return holder;
     }
 
+    // binding the list of itens in the screen
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
-        passPosition = position;
 
         holder.pkname.setText(rName.get(position));
 
+        //trigger event when Pokemon name is clicked
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +69,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 Toast.makeText(mContext, rName.get(position), Toast.LENGTH_SHORT).show();
 
+                //assigning the position that was clicked so HP and Pokedx number can be transfered to the Gallery Activity
+                passPosition = position;
+
+                //sending name and image URL of clicked Pokemon to Gallery Activity
                 Intent intent = new Intent(mContext, GalleryActivity.class);
                 intent.putExtra("image_url", rImageUrl.get(position));
                 intent.putExtra("image_name", rName.get(position));

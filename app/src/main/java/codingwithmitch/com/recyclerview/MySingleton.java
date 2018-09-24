@@ -5,6 +5,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+//Initializing Request Queue for API requests
 
 public class MySingleton {
     private static MySingleton mInstance;

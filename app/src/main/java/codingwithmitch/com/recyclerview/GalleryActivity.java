@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 
 public class GalleryActivity extends AppCompatActivity {
-
+    //methods for getting the HP and Pokedex number of the clicked Pokemon
     String hp = RecyclerViewAdapter.getHp();
     int nationalPokedexNumber = RecyclerViewAdapter.getNationalPokedexNumber();
 
@@ -45,7 +45,7 @@ public class GalleryActivity extends AppCompatActivity {
 
     public void AlertDialog(int nationalPokedexNumber, String hp){
                 new AlertDialog.Builder(this).setTitle("More info").
-                        setMessage("Esse Pokemon possui " + hp + "HP e seu número da Pokedex é" + nationalPokedexNumber).show();
+                        setMessage("Esse Pokemon possui " + hp + "HP e seu número da Pokedex é " + nationalPokedexNumber).show();
 
     }
 
@@ -63,7 +63,7 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     private void setImage(String imageUrl, String imageName){
-        Log.d(TAG, "setImage: setting te image and name to widgets.");
+        Log.d(TAG, "setImage: setting the image and name to widgets.");
 
         TextView name = findViewById(R.id.image_description);
         name.setText(imageName);
